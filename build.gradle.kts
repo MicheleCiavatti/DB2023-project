@@ -20,7 +20,7 @@ javafx {
 }
 
 application {
-    mainClass.set("Hello")
+    mainClass.set("view.Menu")
 }
 
 tasks.named<Test>("test") {
