@@ -1,8 +1,10 @@
 package model;
 
+import java.util.Objects;
+
 public record Session(String nameCampaign, int progressiveCode, String codParty) {
     public Session {
-        Checker.checkName(nameCampaign);
-        Checker.checkCode(codParty);
+        Objects.requireNonNull(nameCampaign);
+        Objects.requireNonNull(codParty);
     }
 }

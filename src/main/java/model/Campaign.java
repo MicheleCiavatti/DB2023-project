@@ -1,7 +1,9 @@
 package model;
 
+import java.util.Objects;
+
 public record Campaign(int numPlayers, String nameCampaign) {
     public Campaign {
-        Checker.checkName(nameCampaign);
+        Objects.requireNonNull(nameCampaign);
     }
 }
