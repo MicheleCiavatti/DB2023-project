@@ -1,4 +1,3 @@
-import model.Campaign;
 
 public class Hello {
     
