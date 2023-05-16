@@ -1,9 +1,9 @@
 package model;
 
-import java.util.Objects;
-
 public record Campaign(int numPlayers, String nameCampaign) {
     public Campaign {
-        Objects.requireNonNull(nameCampaign);
+        if (nameCampaign == null || nameCampaign.length() > 50) {
+            throw new IllegalArgumentException();
+        }
     }
 }
