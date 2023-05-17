@@ -1,7 +1,6 @@
 plugins {
     java
     application
-    id("org.openjfx.javafxplugin") version "0.0.14"
 }
 
 repositories {
@@ -14,13 +13,8 @@ dependencies {
     implementation("mysql:mysql-connector-java:8.0.29")
 }
 
-javafx {
-    version = "17"
-    modules("javafx.controls", "javafx.fxml")
-}
-
 application {
-    mainClass.set("view.Menu")
+    mainClass.set("Hello")
 }
 
 tasks.named<Test>("test") {
