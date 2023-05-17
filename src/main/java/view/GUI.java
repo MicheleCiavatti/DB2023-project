@@ -8,6 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
+
+import db.QueryExecution;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -22,7 +25,7 @@ public class GUI {
     private static final int PROPORTION = 1;
     private final JFrame frame = new JFrame(TITLE);
 
-    public GUI() {
+    public GUI(final QueryExecution execution) {
         final JPanel canvas = new JPanel(new BorderLayout());
         final JPanel left = new JPanel();
         left.setLayout(new BoxLayout(left, BoxLayout.PAGE_AXIS));
