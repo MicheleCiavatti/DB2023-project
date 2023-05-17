@@ -8,12 +8,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
+
+import db.Controller;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class GUI {
@@ -21,8 +25,11 @@ public class GUI {
     private static final String TITLE = "D&D database";
     private static final int PROPORTION = 1;
     private final JFrame frame = new JFrame(TITLE);
+    private final JTextArea result;
+    private final Controller controller;
 
-    public GUI() {
+    public GUI(final Controller controller) {
+        this.controller = Objects.requireNonNull(controller);
         final JPanel canvas = new JPanel(new BorderLayout());
         final JPanel left = new JPanel();
         left.setLayout(new BoxLayout(left, BoxLayout.PAGE_AXIS));
@@ -42,7 +49,7 @@ public class GUI {
         canvas.add(right, BorderLayout.EAST);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        final JTextArea result = createTextArea();
+        this.result = createTextArea();
         canvas.add(result, BorderLayout.CENTER);
     }
 
@@ -59,6 +66,7 @@ public class GUI {
     private Set<JButton> createButtonsSELECT() {
         final Set<JButton> set = new HashSet<>();
         final JButton campaigns = create(set, "Campagne");
+        campaigns.addActionListener(e -> this.result.setText(this.controller.selectAll(campaigns.getText())));
         final JButton sessions = create(set, "Sessioni");
         final JButton parties = create(set, "Parties");
         final JButton protagonists = create(set, "Protagonisti");

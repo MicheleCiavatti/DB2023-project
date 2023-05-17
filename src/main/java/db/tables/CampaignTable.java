@@ -17,14 +17,19 @@ public class CampaignTable {
         this.c = Objects.requireNonNull(c);
     }
 
-    public String select() throws SQLException {
-        final Statement s = this.c.createStatement();
-        final ResultSet r = s.executeQuery("SELECT * FROM " + TABLE_NAME);
-        final StringBuilder sb = new StringBuilder("");
-        while (r.next()) {
-            final Campaign campaign = new Campaign(r.getInt(1), r.getString(2));
-            sb.append(campaign.toString());
+    public String select() {
+        try (final Statement s = this.c.createStatement()) {
+            final ResultSet r = s.executeQuery("SELECT * FROM " + TABLE_NAME);
+            final StringBuilder sb = new StringBuilder("");
+            int i = 0;
+            while (r.next()) {
+                final Campaign campaign = new Campaign(r.getInt(1), r.getString(2));
+                i++;
+                sb.append(i + ". " + campaign.toString() + "\n");
+            }
+            return sb.toString();
+        } catch (final SQLException e) {
+            throw new IllegalStateException(e);
         }
-        return sb.toString();
     }
 }
