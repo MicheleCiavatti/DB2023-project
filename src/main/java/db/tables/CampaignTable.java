@@ -1,6 +1,7 @@
 package db.tables;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,6 +30,15 @@ public class CampaignTable {
             }
             return sb.toString();
         } catch (final SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    public void insert(final int numPlayers, final String nameCampaign) {
+        try (final PreparedStatement s = this.c.prepareStatement("INSERT INTO " + TABLE_NAME + " VALUES (" + numPlayers + ", ?)")) {
+            s.setString(1, nameCampaign);
+            s.executeUpdate();
+        } catch (SQLException e ) {
             throw new IllegalStateException(e);
         }
     }

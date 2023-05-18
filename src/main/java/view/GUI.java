@@ -5,8 +5,11 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import db.Controller;
@@ -16,7 +19,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,6 +29,7 @@ public class GUI {
     
     private static final String TITLE = "D&D database";
     private static final int PROPORTION = 1;
+    private static final int FIELD_LENGTH = 50;
     private final JFrame frame = new JFrame(TITLE);
     private final JTextArea result;
     private final Controller controller;
@@ -33,14 +39,14 @@ public class GUI {
         final JPanel canvas = new JPanel(new BorderLayout());
         final JPanel left = new JPanel();
         left.setLayout(new BoxLayout(left, BoxLayout.PAGE_AXIS));
-        createButtonsOP().forEach(b -> {
+        createButtonsOP().stream().forEachOrdered(b -> {
             left.add(Box.createRigidArea(new Dimension(0, 5)));
             left.add(b);
             left.add(Box.createVerticalGlue());
         });
         final JPanel right = new JPanel();
         right.setLayout(new BoxLayout(right, BoxLayout.PAGE_AXIS));
-        createButtonsSELECT().forEach(b -> {
+        createButtonsSELECT().stream().forEachOrdered(b -> {
             right.add(Box.createRigidArea(new Dimension(0, 5)));
             right.add(b);
             right.add(Box.createVerticalGlue());
@@ -63,44 +69,59 @@ public class GUI {
         return result;
     }
 
-    private Set<JButton> createButtonsSELECT() {
-        final Set<JButton> set = new HashSet<>();
-        final JButton campaigns = create(set, "Campagne");
+    private List<JButton> createButtonsSELECT() {
+        final List<JButton> l = new ArrayList<>();
+        final JButton campaigns = create(l, "Campagne");
         campaigns.addActionListener(e -> this.result.setText(this.controller.selectAll(campaigns.getText())));
-        final JButton sessions = create(set, "Sessioni");
-        final JButton parties = create(set, "Parties");
-        final JButton protagonists = create(set, "Protagonisti");
-        final JButton npcs = create(set, "NPCs");
-        final JButton monsters = create(set, "Mostri");
-        final JButton races = create(set, "Razze");
-        final JButton classes = create(set, "Classi");
-        final JButton subclasses = create(set, "Sottoclassi");
-        final JButton items = create(set, "Oggetti");
-        return set;
+        final JButton sessions = create(l, "Sessioni");
+        final JButton parties = create(l, "Parties");
+        final JButton protagonists = create(l, "Protagonisti");
+        final JButton npcs = create(l, "NPCs");
+        final JButton monsters = create(l, "Mostri");
+        final JButton races = create(l, "Razze");
+        final JButton classes = create(l, "Classi");
+        final JButton subclasses = create(l, "Sottoclassi");
+        final JButton items = create(l, "Oggetti");
+        return l;
     }
 
-    private Set<JButton> createButtonsOP() {
-        final Set<JButton> set = new HashSet<>();
-        final JButton op1 = create(set, "Aggiungi campagna");
-        final JButton op2 = create(set, "Aggiungi sessione");
-        final JButton op3 = create(set, "Aggiungi party");
-        final JButton op4 = create(set, "Aggiungi turno protagonista");
-        final JButton op4b = create(set, "Aggiungi turno mostro");
-        final JButton op5 = create(set, "Media danni per protagonista");
-        final JButton op6 = create(set, "Aggiungi interazione NPC conosciuto");
-        final JButton op7 = create(set, "Aggiungi interazione NPC sconosciuto");
-        final JButton op8 = create(set, "Elenca NPC conosciuti in campagna");
-        final JButton op9 = create(set, "Mostra composizione del party");
-        final JButton op10 = create(set, "Aggiungi oggetto a protagonista");
-        final JButton op11 = create(set, "Mostra oggetti di protagonista");
-        final JButton op12 = create(set, "Verifica se oggetto in possesso del party");
-        return set;
+    private List<JButton> createButtonsOP() {
+        final List<JButton> l = new ArrayList<>();
+        final JButton op1 = create(l, "Aggiungi campagna");
+        op1.addActionListener(e -> {
+            final JPanel p = new JPanel();
+            final JTextField numPlayer = new JTextField(FIELD_LENGTH);
+            final JTextField nameCampaign = new JTextField(FIELD_LENGTH);
+            p.add(new JLabel("numGiocatori: "));
+            p.add(numPlayer);
+            p.add(Box.createHorizontalStrut(15));
+            p.add(new JLabel("nomeCampagna: "));
+            p.add(nameCampaign);
+
+            final int result = JOptionPane.showConfirmDialog(null, p, "Inserisci numGiocatori e nomeCampagna", JOptionPane.OK_CANCEL_OPTION);
+            if (result == JOptionPane.OK_OPTION) {
+                this.controller.op1(Integer.parseInt(numPlayer.getText()), nameCampaign.getText());
+            }
+        });
+        final JButton op2 = create(l, "Aggiungi sessione");
+        final JButton op3 = create(l, "Aggiungi party");
+        final JButton op4 = create(l, "Aggiungi turno protagonista");
+        final JButton op4b = create(l, "Aggiungi turno mostro");
+        final JButton op5 = create(l, "Media danni per protagonista");
+        final JButton op6 = create(l, "Aggiungi interazione NPC conosciuto");
+        final JButton op7 = create(l, "Aggiungi interazione NPC sconosciuto");
+        final JButton op8 = create(l, "Elenca NPC conosciuti in campagna");
+        final JButton op9 = create(l, "Mostra composizione del party");
+        final JButton op10 = create(l, "Aggiungi oggetto a protagonista");
+        final JButton op11 = create(l, "Mostra oggetti di protagonista");
+        final JButton op12 = create(l, "Verifica se oggetto in possesso del party");
+        return l;
     }
 
-    private JButton create(final Set<JButton> set, final String s) {
+    private JButton create(final List<JButton> l, final String s) {
         final JButton b = new JButton(s);
         b.setAlignmentX(Component.CENTER_ALIGNMENT);
-        set.add(b);
+        l.add(b);
         return b;
     }
 

@@ -23,4 +23,8 @@ public class Controller {
         };
         return result;
     }
+
+    public void op1(final int numPlayers, final String nameCampaign) {
+        this.tCampaign.insert(numPlayers, nameCampaign);
+    }
 }
