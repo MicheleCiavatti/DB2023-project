@@ -1,12 +1,10 @@
 package db;
 
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
-
 import db.tables.CampaignTable;
 import db.tables.ClassTable;
 import db.tables.ItemTable;
@@ -143,6 +141,10 @@ public class Controller {
         } catch (final SQLException e) {
             return false;
         }
+    }
+
+    public String op8(final String nameCampaign) {
+        return this.tNPCs.selectByCampaign(nameCampaign);
     }
 
 }

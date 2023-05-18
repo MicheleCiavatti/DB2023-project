@@ -59,4 +59,21 @@ public class NPCTable {
             return false;
         }
     }
+
+    public String selectByCampaign(final String nameCampaign) {
+        try (final PreparedStatement s = this.c.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE nomeCampagna = ?")) {
+            s.setString(1, nameCampaign);
+            final var r = s.executeQuery();
+            final var sb = new StringBuilder();
+            int i = 0;
+            while (r.next()) {
+                final NPC npc = new NPC(r.getString(1), r.getString(2), Optional.ofNullable(r.getBlob(3)), r.getString(4), r.getString(5));
+                i++;
+                sb.append(i + ". " + npc.toString() + " \n");
+            }
+            return sb.toString();
+        } catch (final SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
 }
