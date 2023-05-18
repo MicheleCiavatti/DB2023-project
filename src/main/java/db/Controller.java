@@ -174,4 +174,22 @@ public class Controller {
     public String op11(final String nameProtagonist) {
         return this.tItems.selectByProtagonist(nameProtagonist);
     }
+
+    public boolean op12(final String nameItem, final String codParty) {
+        try (final PreparedStatement s = this.connection.prepareStatement(
+            "SELECT EXISTS (SELECT PR.nomeOggetto " +
+            "FROM composizioni C, protagonisti P, proprieta PR " +
+            "WHERE C.nomeProtagonista = P.nomeProtagonista AND P.nomeProtagonista = PR.nomeProtagonista " +
+            "AND C.codParty = ? AND PR.nomeOggetto = ?)")) {
+                s.setString(1, codParty);
+                s.setString(2, nameItem);
+                final var r = s.executeQuery();
+                r.next();
+                System.out.println(r.getBoolean(1));
+                return r.getInt(1) != 0;
+            } catch (final SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+    }
 }

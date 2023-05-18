@@ -149,7 +149,7 @@ public class GUI {
         });
 
         final JButton op7 = create(l, "Aggiungi interazione NPC conosciuto");
-        op6.addActionListener(e -> {
+        op7.addActionListener(e -> {
             final List<String> data = new DataPane("Inserire nomeNPC, nomeCampagna, codProgressivo, tipoInterazione", 
                 List.of(new JLabel("nomeNPC"), new JLabel("nomeCampagna"), new JLabel("codProgressivo"), new JLabel("tipoInterazione"))).show();
             if (data.size() > 0) {
@@ -184,8 +184,12 @@ public class GUI {
             final List<String> data = new DataPane("Inserire nomeProtagonista", List.of(new JLabel("nomeProtagonista"))).show();
             this.result.setText(this.controller.op11(data.get(0)));
         });
-        
+
         final JButton op12 = create(l, "Verifica se oggetto in possesso del party");
+        op12.addActionListener(e -> {
+            final List<String> data = new DataPane("Inserire nomeOggetto, codParty", List.of(new JLabel("nomeOggetto"), new JLabel("codParty"))).show();
+            this.result.setText(this.controller.op12(data.get(0), data.get(1)) ? "Oggetto presente nel party" : "Oggetto non in possesso del party");
+        });
         return l;
     }
 
