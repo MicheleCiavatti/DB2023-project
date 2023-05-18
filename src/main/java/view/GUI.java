@@ -160,6 +160,11 @@ public class GUI {
         });
         
         final JButton op8 = create(l, "Elenca NPC conosciuti in campagna");
+        op8.addActionListener(e -> {
+            final List<String> data = new DataPane("Inserire nomeCampagna", List.of(new JLabel("nomeCampagna"))).show();
+            this.result.setText(this.controller.op8(data.get(0)));
+        });
+        
         final JButton op9 = create(l, "Mostra composizione del party");
         final JButton op10 = create(l, "Aggiungi oggetto a protagonista");
         final JButton op11 = create(l, "Mostra oggetti di protagonista");
