@@ -3,7 +3,6 @@ package db;
 import java.sql.Connection;
 
 import db.tables.CampaignTable;
-import model.Campaign;
 
 public class Controller {
 

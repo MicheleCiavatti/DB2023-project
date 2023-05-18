@@ -89,7 +89,8 @@ public class GUI {
         final List<JButton> l = new ArrayList<>();
         final JButton op1 = create(l, "Aggiungi campagna");
         op1.addActionListener(e -> {
-            final List<String> data = new DataPane("Inserisci numGiocatori e nomeCampagna", List.of(new JLabel("numGiocatori"), new JLabel("nomeCampagna"))).show();
+            final List<String> data = 
+                new DataPane("Inserisci numGiocatori e nomeCampagna", List.of(new JLabel("numGiocatori"), new JLabel("nomeCampagna"))).show();
             if (data.size() > 0) {
                 this.controller.op1(Integer.parseInt(data.get(0)), data.get(1));
             }
