@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import db.tables.CampaignTable;
 import db.tables.ClassTable;
+import db.tables.ItemTable;
 import db.tables.MonsterTable;
 import db.tables.NPCTable;
 import db.tables.PartyTable;
@@ -24,6 +25,7 @@ public class Controller {
     private final RaceTable tRaces;
     private final ClassTable tClasses;
     private final SubclassTable tSubclasses;
+    private final ItemTable tItems;
 
     public Controller() {
         this.connection = new ConnectionProvider("root", "Michele", "db2023_dnd").getMySQLConnection();
@@ -36,6 +38,7 @@ public class Controller {
         this.tRaces = new RaceTable(connection);
         this.tClasses = new ClassTable(connection);
         this.tSubclasses = new SubclassTable(connection);
+        this.tItems = new ItemTable(connection);
     }
     
     public String selectAll(final String tableName) {
@@ -49,6 +52,7 @@ public class Controller {
             case "Razze" -> this.tRaces.select();
             case "Classi" -> this.tClasses.select();
             case "Sottoclassi" -> this.tSubclasses.select();
+            case "Oggetti" -> this.tItems.select();
             default -> throw new IllegalStateException();
         };
         return result;

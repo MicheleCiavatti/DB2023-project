@@ -83,6 +83,7 @@ public class GUI {
         final JButton subclasses = create(l, "Sottoclassi");
         subclasses.addActionListener(e -> this.result.setText(this.controller.selectAll(subclasses.getText())));
         final JButton items = create(l, "Oggetti");
+        items.addActionListener(e -> this.result.setText(this.controller.selectAll(items.getText())));
         return l;
     }
 
