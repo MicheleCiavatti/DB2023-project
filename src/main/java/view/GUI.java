@@ -54,7 +54,7 @@ public class GUI {
 
     private JTextArea createTextArea() {
         final Border border = BorderFactory.createLineBorder(Color.RED, 2);
-        final JTextArea result = new JTextArea("Words");
+        final JTextArea result = new JTextArea("In quest'area compariranno i risultati delle query.");
         result.setBorder(border);
         result.setBackground(Color.white);
         result.setOpaque(true);
