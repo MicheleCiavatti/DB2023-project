@@ -78,8 +78,8 @@ public class Controller {
             "SELECT AVG(dannoProtagonista) FROM part_protagonisti WHERE nomeProtagonista = ?")) {
             s.setString(1, nameProtagonist);
             final ResultSet r = s.executeQuery();
-            r.next();
-            return nameProtagonist + " infligge mediamente " + String.valueOf(r.getDouble(1)) + " danni.";
+            r.next()
+            return r.getDouble(1) == 0 ? "" : nameProtagonist + " infligge mediamente " + String.valueOf(r.getDouble(1)) + " danni.";
         } catch (final SQLException e) {
             throw new IllegalStateException(e);
         }
