@@ -170,4 +170,8 @@ public class Controller {
     public boolean op10(final String nameItem, final String nameProtagonist, final int quantity) {
         return this.tItems.insertToProtagonist(nameItem, nameProtagonist, quantity);
     }
+
+    public String op11(final String nameProtagonist) {
+        return this.tItems.selectByProtagonist(nameProtagonist);
+    }
 }

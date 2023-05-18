@@ -178,8 +178,13 @@ public class GUI {
             ? "Inserimento riuscito"
             : "Inserimento fallito");
         });
-        
+
         final JButton op11 = create(l, "Mostra oggetti di protagonista");
+        op11.addActionListener(e -> {
+            final List<String> data = new DataPane("Inserire nomeProtagonista", List.of(new JLabel("nomeProtagonista"))).show();
+            this.result.setText(this.controller.op11(data.get(0)));
+        });
+        
         final JButton op12 = create(l, "Verifica se oggetto in possesso del party");
         return l;
     }

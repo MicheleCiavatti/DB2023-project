@@ -35,6 +35,22 @@ public class ItemTable {
         }
     }
 
+    public String selectByProtagonist(final String nameProtagonist) {
+        try (final PreparedStatement s = this.c.prepareStatement("SELECT nomeOggetto, quantità FROM proprieta WHERE nomeProtagonista = ?")) {
+            s.setString(1, nameProtagonist);
+            final var r = s.executeQuery();
+            int i = 0;
+            final var sb = new StringBuilder();
+            while (r.next()) {
+                i++;
+                sb.append(i + ". nomeOggetto = " + r.getString(1) + "; quantità = " + r.getInt(2) + "\n");
+            }
+            return sb.toString();
+        } catch (final SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
     private boolean isPresent (final String nameItem) {
         try(final PreparedStatement s = this.c.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE nomeOggetto = ?")) {
             s.setString(1, nameItem);
