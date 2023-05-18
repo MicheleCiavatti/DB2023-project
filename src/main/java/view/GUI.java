@@ -164,8 +164,12 @@ public class GUI {
             final List<String> data = new DataPane("Inserire nomeCampagna", List.of(new JLabel("nomeCampagna"))).show();
             this.result.setText(this.controller.op8(data.get(0)));
         });
-        
+
         final JButton op9 = create(l, "Mostra composizione del party");
+        op8.addActionListener(e -> {
+            final List<String> data = new DataPane("Inserire codParty", List.of(new JLabel("codParty"))).show();
+            this.result.setText(this.controller.op9(data.get(0)));
+        });
         final JButton op10 = create(l, "Aggiungi oggetto a protagonista");
         final JButton op11 = create(l, "Mostra oggetti di protagonista");
         final JButton op12 = create(l, "Verifica se oggetto in possesso del party");

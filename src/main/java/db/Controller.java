@@ -16,6 +16,7 @@ import db.tables.RaceTable;
 import db.tables.SessionTable;
 import db.tables.SubclassTable;
 import db.tables.TurnTable;
+import model.Protagonist;
 
 public class Controller {
 
@@ -147,4 +148,23 @@ public class Controller {
         return this.tNPCs.selectByCampaign(nameCampaign);
     }
 
+    public String op9(final String codParty) {
+        try (final PreparedStatement s = this.connection.prepareStatement(
+            "SELECT P.nomeProtagonista, P.nomeRazza, P.nomeClasse, P.numeroSottoclasse" +
+            "FROM composizioni C JOIN protagonisti P ON (C.nomeProtagonista = P.nomeProtagonista)" +
+            "WHERE codParty = ?")) {
+                s.setString(1, codParty);
+                final var r = s.executeQuery();
+                int i = 0;
+                final var sb = new StringBuilder();
+                while (r.next()) {
+                    i++;
+                    sb.append(i + ". nomeProtagonista = " + r.getString(1) + "; nomeRazza = " + r.getString(2) + 
+                        "; nomeClasse = " + r.getString(3) + "; numSottoclasse = " + r.getInt(4) + "\n");
+                }
+                return sb.toString();
+        } catch (final SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
 }
