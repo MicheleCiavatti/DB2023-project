@@ -106,6 +106,12 @@ public class GUI {
             }
         });
         final JButton op3 = create(l, "Aggiungi party");
+        op3.addActionListener(e -> {
+            final List<String> data = new DataPane("Inserire codParty", List.of(new JLabel("codParty"))).show();
+            if (data.size() > 0) {
+                this.controller.op3(data.get(0));
+            }
+        });
         final JButton op4 = create(l, "Aggiungi turno protagonista");
         final JButton op4b = create(l, "Aggiungi turno mostro");
         final JButton op5 = create(l, "Media danni per protagonista");

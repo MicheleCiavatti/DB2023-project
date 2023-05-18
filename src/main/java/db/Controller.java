@@ -37,4 +37,8 @@ public class Controller {
     public void op2(final String nameCampaign, final int progressiveCode, final String codParty) {
         this.tSessions.insert(nameCampaign, progressiveCode, codParty);
     }
+
+    public void op3(final String codParty) {
+        this.tParties.insert(codParty);
+    }
 }
