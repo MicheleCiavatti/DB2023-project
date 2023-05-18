@@ -123,6 +123,13 @@ public class GUI {
             }
         });
         final JButton op4b = create(l, "Aggiungi turno mostro");
+        op4b.addActionListener(e -> {
+            final List<String> data = new DataPane("Inserire numTurno, nomeCampagna, codProgressivo, nomeMostro e dannoMostro", 
+                List.of(new JLabel("numTurno"), new JLabel("nomeCampagna"), new JLabel("codProgressivo"), new JLabel("nomeMostro"), new JLabel("dannoMostro"))).show();
+            if (data.size() > 0) {
+                this.controller.op4(Integer.parseInt(data.get(0)), data.get(1), Integer.parseInt(data.get(2)), data.get(3), Integer.parseInt(data.get(4)));
+            }
+        });
         final JButton op5 = create(l, "Media danni per protagonista");
         op5.addActionListener(e -> {
             final List<String> data = new DataPane("Inserire nomeProtagonista", List.of(new JLabel("nomeProtagonista"))).show();

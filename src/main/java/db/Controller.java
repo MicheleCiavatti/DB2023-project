@@ -91,6 +91,20 @@ public class Controller {
         }
     }
 
+    public void op4b(final int numTurn, final String nameCampaign, final int progressiveCode, final String nameMonster, final int damageMonster) {
+        // First we add the turn
+        this.tTurns.insert(numTurn, nameCampaign, progressiveCode);
+        // Then we add the protagonist partecipation
+        try (final PreparedStatement s = this.connection.prepareStatement(
+            "INSERT INTO part_mostri VALUES (" + numTurn + ", ?, " + progressiveCode + ", ?, " + damageMonster + ")")) {
+            s.setString(1, nameCampaign);
+            s.setString(2, nameMonster);
+            s.executeUpdate();
+        } catch (final SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
     public String op5(final String nameProtagonist) {
         try (final PreparedStatement s = this.connection.prepareStatement(
             "SELECT AVG(dannoProtagonista) FROM part_protagonisti WHERE nomeProtagonista = ?")) {
