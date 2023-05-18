@@ -11,4 +11,9 @@ public record NPC(String typeInteraction, String nameNPC, Optional<Blob> imageNP
         Objects.requireNonNull(descPersonality);
         Objects.requireNonNull(nameCampaign);
     }
+
+    public String toString() {
+        return "tipoInterazione = " + this.typeInteraction + "; nomeNPC = " + this.nameNPC + 
+        "; descrizionePersonalità = " + this.descPersonality + "; nomeCampagna = " + this.nameCampaign;
+    }
 }
