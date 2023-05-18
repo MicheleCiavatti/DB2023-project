@@ -74,6 +74,7 @@ public class GUI {
         final JButton campaigns = create(l, "Campagne");
         campaigns.addActionListener(e -> this.result.setText(this.controller.selectAll(campaigns.getText())));
         final JButton sessions = create(l, "Sessioni");
+        sessions.addActionListener(e -> this.result.setText(this.controller.selectAll(sessions.getText())));
         final JButton parties = create(l, "Parties");
         final JButton protagonists = create(l, "Protagonisti");
         final JButton npcs = create(l, "NPCs");

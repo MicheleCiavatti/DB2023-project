@@ -19,6 +19,7 @@ public class SessionTable {
     }
 
     public String select() {
+        System.out.println("Hello");
         try (final Statement s = this.c.createStatement()) {
             final ResultSet r = s.executeQuery("SELECT * FROM " + TABLE_NAME);
             final StringBuilder sb = new StringBuilder("");
