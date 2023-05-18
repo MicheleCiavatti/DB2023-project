@@ -16,7 +16,6 @@ import db.tables.RaceTable;
 import db.tables.SessionTable;
 import db.tables.SubclassTable;
 import db.tables.TurnTable;
-import model.Protagonist;
 
 public class Controller {
 

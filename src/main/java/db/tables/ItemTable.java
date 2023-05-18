@@ -47,13 +47,14 @@ public class ItemTable {
 
     public boolean insertToProtagonist(final String nameItem, final String nameProtagonist, final int quantity) {
         if (this.isPresent(nameItem)) {
-            try (final PreparedStatement s = this.c.prepareStatement("INSERT INTO proprietà VALUES (?, ?, ?)")) {
+            try (final PreparedStatement s = this.c.prepareStatement("INSERT INTO proprieta VALUES (?, ?, ?)")) {
                 s.setString(1, nameItem);
                 s.setString(2, nameProtagonist);
                 s.setInt(3, quantity);
                 s.executeUpdate();
                 return true;
             } catch (final SQLException e) {
+                e.printStackTrace();
                 return false;
             }
         }
