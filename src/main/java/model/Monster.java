@@ -8,4 +8,8 @@ public record Monster(String nameMonster, Optional<Blob> imageMonster) {
     public Monster {
         Objects.requireNonNull(nameMonster);
     }
+
+    public String toString() {
+        return "nomeMostro = " + this.nameMonster;
+    }
 }
