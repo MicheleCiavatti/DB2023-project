@@ -77,6 +77,7 @@ public class GUI {
         final JButton monsters = create(l, "Mostri");
         monsters.addActionListener(e -> this.result.setText(this.controller.selectAll(monsters.getText())));
         final JButton races = create(l, "Razze");
+        races.addActionListener(e -> this.result.setText(this.controller.selectAll(races.getText())));
         final JButton classes = create(l, "Classi");
         final JButton subclasses = create(l, "Sottoclassi");
         final JButton items = create(l, "Oggetti");

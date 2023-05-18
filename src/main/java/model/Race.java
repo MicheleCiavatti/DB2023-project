@@ -7,4 +7,8 @@ public record Race(String nameRace, String descRace) {
         Objects.requireNonNull(nameRace);
         Objects.requireNonNull(descRace);
     }
+
+    public String toString() {
+        return "nomeRazza = " + this.nameRace + "; descRazza = " + this.descRace;
+    }
 }
