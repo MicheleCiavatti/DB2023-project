@@ -34,13 +34,15 @@ public class TurnTable {
         }
     }
 
-    public void insert(final int numTurn, final String nameCampaign, final int progressiveCode) {
+    public boolean insert(final int numTurn, final String nameCampaign, final int progressiveCode) {
         try (final PreparedStatement s = this.c.prepareStatement("INSERT INTO turni VALUES (?, ?, ?)")) {
             s.setInt(1, numTurn);
             s.setString(2, nameCampaign);
             s.setInt(3, progressiveCode);
+            s.executeUpdate();
+            return true;
         } catch (final SQLException e) {
-            e.printStackTrace();
+            return false;
         }
     }
 }
