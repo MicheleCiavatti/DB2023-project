@@ -92,12 +92,19 @@ public class GUI {
         final JButton op1 = create(l, "Aggiungi campagna");
         op1.addActionListener(e -> {
             final List<String> data = 
-                new DataPane("Inserisci numGiocatori e nomeCampagna", List.of(new JLabel("numGiocatori"), new JLabel("nomeCampagna"))).show();
+                new DataPane("Inserire numGiocatori e nomeCampagna", List.of(new JLabel("numGiocatori"), new JLabel("nomeCampagna"))).show();
             if (data.size() > 0) {
                 this.controller.op1(Integer.parseInt(data.get(0)), data.get(1));
             }
         });
         final JButton op2 = create(l, "Aggiungi sessione");
+        op2.addActionListener(e -> {
+            final List<String> data = new DataPane("Inserire nomeCampagna, codProgressivo e codParty", 
+                    List.of(new JLabel("nomeCampagna"), new JLabel("codProgressivo"), new JLabel("codParty"))).show();
+            if (data.size() > 0) {
+                this.controller.op2(data.get(0), Integer.parseInt(data.get(1)), data.get(2));
+            }
+        });
         final JButton op3 = create(l, "Aggiungi party");
         final JButton op4 = create(l, "Aggiungi turno protagonista");
         final JButton op4b = create(l, "Aggiungi turno mostro");

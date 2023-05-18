@@ -33,4 +33,8 @@ public class Controller {
     public void op1(final int numPlayers, final String nameCampaign) {
         this.tCampaign.insert(numPlayers, nameCampaign);
     }
+
+    public void op2(final String nameCampaign, final int progressiveCode, final String codParty) {
+        this.tSessions.insert(nameCampaign, progressiveCode, codParty);
+    }
 }

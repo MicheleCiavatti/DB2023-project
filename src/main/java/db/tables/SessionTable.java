@@ -35,9 +35,10 @@ public class SessionTable {
         }
     }
 
-    public void insert(final int numPlayers, final String nameCampaign) {
-        try (final PreparedStatement s = this.c.prepareStatement("INSERT INTO " + TABLE_NAME + " VALUES (" + numPlayers + ", ?)")) {
+    public void insert(final String nameCampaign, final int progressiveCode, final String codParty) {
+        try (final PreparedStatement s = this.c.prepareStatement("INSERT INTO " + TABLE_NAME + " VALUES (?, " + progressiveCode + ", ?)")) {
             s.setString(1, nameCampaign);
+            s.setString(2, codParty);
             s.executeUpdate();
         } catch (SQLException e ) {
             throw new IllegalStateException(e);
