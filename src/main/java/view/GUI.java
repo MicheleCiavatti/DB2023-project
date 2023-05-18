@@ -84,6 +84,8 @@ public class GUI {
         subclasses.addActionListener(e -> this.result.setText(this.controller.selectAll(subclasses.getText())));
         final JButton items = create(l, "Oggetti");
         items.addActionListener(e -> this.result.setText(this.controller.selectAll(items.getText())));
+        final JButton turns = create(l, "Turni");
+        turns.addActionListener(e -> this.result.setText(this.controller.selectAll(turns.getText())));
         return l;
     }
 
@@ -113,6 +115,13 @@ public class GUI {
             }
         });
         final JButton op4 = create(l, "Aggiungi turno protagonista");
+        op4.addActionListener(e -> {
+            final List<String> data = new DataPane("Inserire numTurno, nomeCampagna, codProgressivo, nomeProtagonista e dannoProtagonista", 
+                List.of(new JLabel("numTurno"), new JLabel("nomeCampagna"), new JLabel("codProgressivo"), new JLabel("nomeProtagonista"), new JLabel("dannoProtagonista"))).show();
+            if (data.size() > 0) {
+                this.controller.op4(Integer.parseInt(data.get(0)), data.get(1), Integer.parseInt(data.get(2)), data.get(3), Integer.parseInt(data.get(4)));
+            }
+        });
         final JButton op4b = create(l, "Aggiungi turno mostro");
         final JButton op5 = create(l, "Media danni per protagonista");
         op5.addActionListener(e -> {

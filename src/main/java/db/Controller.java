@@ -15,6 +15,7 @@ import db.tables.ProtagonistTable;
 import db.tables.RaceTable;
 import db.tables.SessionTable;
 import db.tables.SubclassTable;
+import db.tables.TurnTable;
 
 public class Controller {
 
@@ -29,6 +30,7 @@ public class Controller {
     private final ClassTable tClasses;
     private final SubclassTable tSubclasses;
     private final ItemTable tItems;
+    private final TurnTable tTurns;
 
     public Controller() {
         this.connection = new ConnectionProvider("root", "Michele", "db2023_dnd").getMySQLConnection();
@@ -42,6 +44,7 @@ public class Controller {
         this.tClasses = new ClassTable(connection);
         this.tSubclasses = new SubclassTable(connection);
         this.tItems = new ItemTable(connection);
+        this.tTurns = new TurnTable(connection);
     }
     
     public String selectAll(final String tableName) {
@@ -56,6 +59,7 @@ public class Controller {
             case "Classi" -> this.tClasses.select();
             case "Sottoclassi" -> this.tSubclasses.select();
             case "Oggetti" -> this.tItems.select();
+            case "Turni" -> this.tTurns.select();
             default -> throw new IllegalStateException();
         };
         return result;
@@ -71,6 +75,11 @@ public class Controller {
 
     public void op3(final String codParty) {
         this.tParties.insert(codParty);
+    }
+    
+    public void op4(final int numTurn, final String nameCampaign, final int progressiveCode, final String nameProtagonist, final int damageProtagonist) {
+        /*First we add the turn */
+        this.tTurns.insert(numTurn, nameCampaign, progressiveCode);
     }
 
     public String op5(final String nameProtagonist) {
