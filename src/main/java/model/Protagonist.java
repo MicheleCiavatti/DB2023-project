@@ -11,4 +11,9 @@ public record Protagonist(Optional<Blob> imageProtagonist, String nameProtagonis
         Objects.requireNonNull(nameClass);
         Objects.requireNonNull(nameRace);
     }
+
+    public String toString() {
+        return "nomeProtagonista = " + this.nameProtagonist + "; oro = " + this.gold + "; livello = " + this.level + 
+            "; nomeClasse = " + this.nameClass + "; numSottoclasse = " + this.numSubclass + "; nomeRazza = " + this.nameRace;
+    }
 }
