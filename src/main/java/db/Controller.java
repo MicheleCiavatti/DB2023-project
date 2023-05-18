@@ -1,6 +1,9 @@
 package db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import db.tables.CampaignTable;
 import db.tables.ClassTable;
@@ -68,5 +71,17 @@ public class Controller {
 
     public void op3(final String codParty) {
         this.tParties.insert(codParty);
+    }
+
+    public String op5(final String nameProtagonist) {
+        try (final PreparedStatement s = this.connection.prepareStatement(
+            "SELECT AVG(dannoProtagonista) FROM part_protagonisti WHERE nomeProtagonista = ?")) {
+            s.setString(1, nameProtagonist);
+            final ResultSet r = s.executeQuery();
+            r.next();
+            return nameProtagonist + " infligge mediamente " + String.valueOf(r.getDouble(1)) + " danni.";
+        } catch (final SQLException e) {
+            throw new IllegalStateException(e);
+        }
     }
 }

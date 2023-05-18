@@ -115,6 +115,12 @@ public class GUI {
         final JButton op4 = create(l, "Aggiungi turno protagonista");
         final JButton op4b = create(l, "Aggiungi turno mostro");
         final JButton op5 = create(l, "Media danni per protagonista");
+        op5.addActionListener(e -> {
+            final List<String> data = new DataPane("Inserire nomeProtagonista", List.of(new JLabel("nomeProtagonista"))).show();
+            if (data.size() > 0) {
+                this.result.setText(this.controller.op5(data.get(0)));
+            }
+        });
         final JButton op6 = create(l, "Aggiungi interazione NPC conosciuto");
         final JButton op7 = create(l, "Aggiungi interazione NPC sconosciuto");
         final JButton op8 = create(l, "Elenca NPC conosciuti in campagna");
