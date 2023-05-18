@@ -150,8 +150,8 @@ public class Controller {
 
     public String op9(final String codParty) {
         try (final PreparedStatement s = this.connection.prepareStatement(
-            "SELECT P.nomeProtagonista, P.nomeRazza, P.nomeClasse, P.numeroSottoclasse" +
-            "FROM composizioni C JOIN protagonisti P ON (C.nomeProtagonista = P.nomeProtagonista)" +
+            "SELECT P.nomeProtagonista, P.nomeRazza, P.nomeClasse, P.numeroSottoclasse " +
+            "FROM composizioni C JOIN protagonisti P ON (C.nomeProtagonista = P.nomeProtagonista) " +
             "WHERE codParty = ?")) {
                 s.setString(1, codParty);
                 final var r = s.executeQuery();

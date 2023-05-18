@@ -166,7 +166,7 @@ public class GUI {
         });
 
         final JButton op9 = create(l, "Mostra composizione del party");
-        op8.addActionListener(e -> {
+        op9.addActionListener(e -> {
             final List<String> data = new DataPane("Inserire codParty", List.of(new JLabel("codParty"))).show();
             this.result.setText(this.controller.op9(data.get(0)));
         });
