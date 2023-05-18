@@ -1,6 +1,7 @@
 package db.tables;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -32,6 +33,31 @@ public class ItemTable {
         } catch (final SQLException e) {
             throw new IllegalStateException(e);
         }
+    }
+
+    private boolean isPresent (final String nameItem) {
+        try(final PreparedStatement s = this.c.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE nomeOggetto = ?")) {
+            s.setString(1, nameItem);
+            final var r = s.executeQuery();
+            return r.next();
+        } catch (final SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean insertToProtagonist(final String nameItem, final String nameProtagonist, final int quantity) {
+        if (this.isPresent(nameItem)) {
+            try (final PreparedStatement s = this.c.prepareStatement("INSERT INTO proprietà VALUES (?, ?, ?)")) {
+                s.setString(1, nameItem);
+                s.setString(2, nameProtagonist);
+                s.setInt(3, quantity);
+                s.executeUpdate();
+                return true;
+            } catch (final SQLException e) {
+                return false;
+            }
+        }
+        return false;
     }
 }
 

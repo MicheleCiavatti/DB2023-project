@@ -167,4 +167,8 @@ public class Controller {
             throw new IllegalStateException(e);
         }
     }
+
+    public boolean op10(final String nameItem, final String nameProtagonist, final int quantity) {
+        return this.tItems.insertToProtagonist(nameItem, nameProtagonist, quantity);
+    }
 }

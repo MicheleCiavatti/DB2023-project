@@ -171,6 +171,14 @@ public class GUI {
             this.result.setText(this.controller.op9(data.get(0)));
         });
         final JButton op10 = create(l, "Aggiungi oggetto a protagonista");
+        op10.addActionListener(e -> {
+            final List<String> data = new DataPane("Inserire nomeOggetto, nomeProtagonista, quantità", 
+                List.of(new JLabel("nomeOggetto"), new JLabel("nomeProtagonista"), new JLabel("quantità"))).show();
+            this.result.setText(this.controller.op10(data.get(0), data.get(1), Integer.parseInt(data.get(2)))
+            ? "Inserimento riuscito"
+            : "Inserimento fallito");
+        });
+        
         final JButton op11 = create(l, "Mostra oggetti di protagonista");
         final JButton op12 = create(l, "Verifica se oggetto in possesso del party");
         return l;
