@@ -7,4 +7,9 @@ public record Session(String nameCampaign, int progressiveCode, String codParty)
         Objects.requireNonNull(nameCampaign);
         Objects.requireNonNull(codParty);
     }
+
+    @Override
+    public String toString() {
+        return "nomeCampagna = " + this.nameCampaign + "; codProgressivo = " + this.progressiveCode + "; codParty = " + this.codParty;
+    }
 }
