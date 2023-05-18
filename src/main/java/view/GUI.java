@@ -6,30 +6,23 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
-
 import db.Controller;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class GUI {
     
     private static final String TITLE = "D&D database";
     private static final int PROPORTION = 1;
-    private static final int FIELD_LENGTH = 50;
     private final JFrame frame = new JFrame(TITLE);
     private final JTextArea result;
     private final Controller controller;
