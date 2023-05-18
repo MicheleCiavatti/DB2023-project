@@ -49,4 +49,14 @@ public class NPCTable {
             return false;
         }
     }
+
+    public boolean update(final String nameNPC, final String typeInteraction) {
+        try (final PreparedStatement s = this.c.prepareStatement("UPDATE npcs SET tipoInterazione = ? WHERE nomeNPC = ?")) {
+            s.setString(1, typeInteraction);
+            s.setString(2, nameNPC);
+            return true;
+        } catch (final SQLException e) {
+            return false;
+        }
+    }
 }

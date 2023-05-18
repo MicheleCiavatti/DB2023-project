@@ -137,16 +137,28 @@ public class GUI {
                 this.result.setText(this.controller.op5(data.get(0)));
             }
         });
-        final JButton op6 = create(l, "Aggiungi interazione NPC conosciuto");
-
-        final JButton op7 = create(l, "Aggiungi interazione NPC sconosciuto");
-        op7.addActionListener(e -> {
+        final JButton op6 = create(l, "Aggiungi interazione NPC sconosciuto");
+        op6.addActionListener(e -> {
             final List<String> data = new DataPane("Inserire tipoInterazione, nomeNPC, descrizionePersonalità, nomeCampagna, codProgressivo", 
                 List.of(new JLabel("tipoInterazione"), new JLabel("nomeNPC"), new JLabel("descrizionePersonalità"), new JLabel("nomeCampagna"), new JLabel("codProgressivo"))).show();
             if (data.size() > 0) {
-                this.controller.op7(data.get(0), data.get(1), data.get(2), data.get(3), Integer.parseInt(data.get(4)));
+                this.result.setText(this.controller.op6(data.get(0), data.get(1), data.get(2), data.get(3), Integer.parseInt(data.get(4)))
+                ? "Inserimento riuscito"
+                : "Inserimento fallito");
             }
         });
+
+        final JButton op7 = create(l, "Aggiungi interazione NPC conosciuto");
+        op6.addActionListener(e -> {
+            final List<String> data = new DataPane("Inserire nomeNPC, nomeCampagna, codProgressivo, tipoInterazione", 
+                List.of(new JLabel("nomeNPC"), new JLabel("nomeCampagna"), new JLabel("codProgressivo"), new JLabel("tipoInterazione"))).show();
+            if (data.size() > 0) {
+                this.result.setText(this.controller.op7(data.get(0), data.get(1), Integer.parseInt(data.get(2)), data.get(3))
+                ? "Aggiornamento riuscito"
+                : "Aggiornamento fallito");
+            }
+        });
+        
         final JButton op8 = create(l, "Elenca NPC conosciuti in campagna");
         final JButton op9 = create(l, "Mostra composizione del party");
         final JButton op10 = create(l, "Aggiungi oggetto a protagonista");

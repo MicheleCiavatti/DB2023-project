@@ -119,17 +119,30 @@ public class Controller {
         }
     }
 
-    public void op7(final String typeInteraction ,final String nameNPC, final String descPersonality, final String nameCampaign, final int progressiveCode) {
-        // First we add the NPC
-        this.tNPCs.insert(typeInteraction, nameNPC, Optional.empty(), descPersonality, nameCampaign);
-        // Then we add its appearence
+    public boolean op6(final String typeInteraction ,final String nameNPC, final String descPersonality, final String nameCampaign, final int progressiveCode) {
         try (final PreparedStatement s = this.connection.prepareStatement("INSERT INTO comparse VALUES (?, ?, ?, ?)")) {
             s.setString(1, nameCampaign);
             s.setInt(2, progressiveCode);
             s.setString(3, nameNPC);
             s.setString(4, typeInteraction);
+            return this.tNPCs.insert(typeInteraction, nameNPC, Optional.empty(), descPersonality, nameCampaign);
         } catch (final SQLException e) {
-            throw new IllegalStateException(e);
+            return false;
         }
     }
+
+    public boolean op7(final String nameNPC, final String nameCampaign, final int progressiveCode, final String typeInteraction) {
+        try (final PreparedStatement s = this.connection.prepareStatement(
+            "UPDATE comparse SET tipoRapporto = ? WHERE nomeCampagna = ? AND codProgressivo = ? AND nomeNPC = ?")) {
+            s.setString(1, typeInteraction);
+            s.setString(2, nameCampaign);
+            s.setInt(2, progressiveCode);
+            s.setString(3, nameNPC);
+            s.executeUpdate();
+            return this.tNPCs.update(nameNPC, typeInteraction);
+        } catch (final SQLException e) {
+            return false;
+        }
+    }
+
 }
