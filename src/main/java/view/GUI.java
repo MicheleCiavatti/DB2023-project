@@ -79,6 +79,7 @@ public class GUI {
         final JButton races = create(l, "Razze");
         races.addActionListener(e -> this.result.setText(this.controller.selectAll(races.getText())));
         final JButton classes = create(l, "Classi");
+        classes.addActionListener(e -> this.result.setText(this.controller.selectAll(classes.getText())));
         final JButton subclasses = create(l, "Sottoclassi");
         final JButton items = create(l, "Oggetti");
         return l;
