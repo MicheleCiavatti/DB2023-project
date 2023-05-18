@@ -77,9 +77,18 @@ public class Controller {
         this.tParties.insert(codParty);
     }
     
-    public void op4(final int numTurn, final String nameCampaign, final int progressiveCode, final String nameProtagonist, final int damageProtagonist) {
-        /*First we add the turn */
+   public void op4(final int numTurn, final String nameCampaign, final int progressiveCode, final String nameProtagonist, final int damageProtagonist) {
+        // First we add the turn
         this.tTurns.insert(numTurn, nameCampaign, progressiveCode);
+        // Then we add the protagonist partecipation
+        try (final PreparedStatement s = this.connection.prepareStatement(
+            "INSERT INTO part_protagonisti VALUES (" + numTurn + ", ?, " + progressiveCode + ", ?, " + damageProtagonist + ")")) {
+            s.setString(1, nameCampaign);
+            s.setString(2, nameProtagonist);
+            s.executeUpdate();
+        } catch (final SQLException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     public String op5(final String nameProtagonist) {
