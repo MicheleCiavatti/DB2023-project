@@ -13,9 +13,10 @@ import javax.swing.JTextField;
 
 public class DataPane {
     
-    final JPanel canvas;
-    final String title;
-    final List<JTextField> fields;
+    private static final int WIDTH_TEXT = 30;
+    private final JPanel canvas;
+    private final String title;
+    private final List<JTextField> fields;
 
     public DataPane(final String title, final List<JLabel> labels) {
         this.canvas = new JPanel();
@@ -23,7 +24,7 @@ public class DataPane {
         canvas.setLayout(new BoxLayout(canvas, BoxLayout.PAGE_AXIS));
         this.fields = new ArrayList<>();
         labels.forEach(l -> {
-            fields.add(new JTextField());
+            fields.add(new JTextField(WIDTH_TEXT));
             l.setText(l.getText() + ": ");
         });
         Stream.iterate(0, i -> i < labels.size(), i -> i + 1).forEach(i -> {

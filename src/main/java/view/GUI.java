@@ -89,18 +89,9 @@ public class GUI {
         final List<JButton> l = new ArrayList<>();
         final JButton op1 = create(l, "Aggiungi campagna");
         op1.addActionListener(e -> {
-            final JPanel p = new JPanel();
-            final JTextField numPlayer = new JTextField(FIELD_LENGTH);
-            final JTextField nameCampaign = new JTextField(FIELD_LENGTH);
-            p.add(new JLabel("numGiocatori: "));
-            p.add(numPlayer);
-            p.add(Box.createHorizontalStrut(15));
-            p.add(new JLabel("nomeCampagna: "));
-            p.add(nameCampaign);
-
-            final int result = JOptionPane.showConfirmDialog(null, p, "Inserisci numGiocatori e nomeCampagna", JOptionPane.OK_CANCEL_OPTION);
-            if (result == JOptionPane.OK_OPTION) {
-                this.controller.op1(Integer.parseInt(numPlayer.getText()), nameCampaign.getText());
+            final List<String> data = new DataPane("Inserisci numGiocatori e nomeCampagna", List.of(new JLabel("numGiocatori"), new JLabel("nomeCampagna"))).show();
+            if (data.size() > 0) {
+                this.controller.op1(Integer.parseInt(data.get(0)), data.get(1));
             }
         });
         final JButton op2 = create(l, "Aggiungi sessione");
