@@ -7,4 +7,8 @@ public record Subclass(String nameClass, int numSubclass, String descSubclass) {
         Objects.requireNonNull(nameClass);
         Objects.requireNonNull(descSubclass);
     }
+
+    public String toString() {
+        return "nomeClasse = " + this.nameClass + "; numSottoclasse = " + this.numSubclass + "; descSottoclasse = " + this.descSubclass;
+    }
 }
