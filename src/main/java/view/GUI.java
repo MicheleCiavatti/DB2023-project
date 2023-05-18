@@ -138,7 +138,15 @@ public class GUI {
             }
         });
         final JButton op6 = create(l, "Aggiungi interazione NPC conosciuto");
+
         final JButton op7 = create(l, "Aggiungi interazione NPC sconosciuto");
+        op7.addActionListener(e -> {
+            final List<String> data = new DataPane("Inserire tipoInterazione, nomeNPC, descrizionePersonalità, nomeCampagna, codProgressivo", 
+                List.of(new JLabel("tipoInterazione"), new JLabel("nomeNPC"), new JLabel("descrizionePersonalità"), new JLabel("nomeCampagna"), new JLabel("codProgressivo"))).show();
+            if (data.size() > 0) {
+                this.controller.op7(data.get(0), data.get(1), data.get(2), data.get(3), Integer.parseInt(data.get(4)));
+            }
+        });
         final JButton op8 = create(l, "Elenca NPC conosciuti in campagna");
         final JButton op9 = create(l, "Mostra composizione del party");
         final JButton op10 = create(l, "Aggiungi oggetto a protagonista");

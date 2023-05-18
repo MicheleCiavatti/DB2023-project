@@ -1,9 +1,11 @@
 package db;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import db.tables.CampaignTable;
 import db.tables.ClassTable;
@@ -112,6 +114,20 @@ public class Controller {
             final ResultSet r = s.executeQuery();
             r.next();
             return r.getDouble(1) == 0 ? "" : nameProtagonist + " infligge mediamente " + String.valueOf(r.getDouble(1)) + " danni.";
+        } catch (final SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    public void op7(final String typeInteraction ,final String nameNPC, final String descPersonality, final String nameCampaign, final int progressiveCode) {
+        // First we add the NPC
+        this.tNPCs.insert(typeInteraction, nameNPC, Optional.empty(), descPersonality, nameCampaign);
+        // Then we add its appearence
+        try (final PreparedStatement s = this.connection.prepareStatement("INSERT INTO comparse VALUES (?, ?, ?, ?)")) {
+            s.setString(1, nameCampaign);
+            s.setInt(2, progressiveCode);
+            s.setString(3, nameNPC);
+            s.setString(4, typeInteraction);
         } catch (final SQLException e) {
             throw new IllegalStateException(e);
         }

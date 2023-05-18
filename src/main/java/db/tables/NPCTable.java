@@ -1,6 +1,8 @@
 package db.tables;
 
+import java.sql.Blob;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,6 +33,20 @@ public class NPCTable {
             return sb.toString();
         } catch (final SQLException e) {
             throw new IllegalStateException(e);
+        }
+    }
+
+    public boolean insert(final String typeInteraction ,final String nameNPC, final Optional<Blob> imageNPC, final String descPersonality, final String nameCampaign) {
+        try (final PreparedStatement s = this.c.prepareStatement("INSERT INTO npcs VALUES (?, ?, ?, ?, ?)")) {
+            s.setString(1, typeInteraction);
+            s.setString(2, nameNPC);
+            s.setBlob(3, imageNPC.orElse(null));
+            s.setString(4, descPersonality);
+            s.setString(5, nameCampaign);
+            s.executeUpdate();
+            return true;
+        } catch (final SQLException e) {
+            return false;
         }
     }
 }
