@@ -33,7 +33,7 @@ public class Controller {
     private final TurnTable tTurns;
 
     public Controller() {
-        this.connection = new ConnectionProvider("root", "Michele", "db2023_dnd").getMySQLConnection();
+        this.connection = new ConnectionProvider("root", "", "db2023_dnd").getMySQLConnection();
         this.tCampaign = new CampaignTable(connection);
         this.tSessions = new SessionTable(connection);
         this.tParties = new PartyTable(connection);

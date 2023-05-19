@@ -1,0 +1,1 @@
+Si richiede l'avere un database db2023_dnd nella macchina locale, che può essere creato sfruttando le query nella cartella apposita del progetto (riferimento al README.md). Non sono richiesti altri passaggi.
